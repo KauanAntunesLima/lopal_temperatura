@@ -12,70 +12,95 @@ import javax.swing.JTextField;
 import br.senai.sp.jandira.conversortemperatura.model.Temperatura;
 
 public class TelaConversor {
+	 // Campo de texto para digitar a temperatura em Celsius
+    private JTextField campoCelsius;
+    // Label para exibir o resultado da conversão
+    private JLabel labelResultado;
+    // Label para exibir o resultado da conversão
+    private JLabel labelErro;
+ // Método para criar e exibir a tela
+    public void criarTela() {
 
-	private JTextField campoCelsius;
-	private JLabel labelResultado;
-	private JLabel labelErro;
+        JFrame tela = new JFrame(); // Janela principal
+        Dimension tamanho = new Dimension();
+        tamanho.setSize(400, 300); // Tamanho que eu escolhi para a janela
 
-	public void criarTela() {
+        tela.setSize(tamanho);
+        tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fecha o programa ao cliclar no "X"
+        tela.setLayout(null);
+        
+     // Label para instrução de entrada
+        JLabel labelEntrada = new JLabel("Digite a temperatura em Celsius");
+        labelEntrada.setBounds(30, 30, 250, 25);
+        
+     // Campo onde o usuário digita a temperatura
+        campoCelsius = new JTextField();
+        campoCelsius.setBounds(30, 60, 150, 25);
+        
+     // Botão para converter para Fahrenheit
+        JButton botaoFahrenheit = new JButton("Converter para Fahrenheit");
+        botaoFahrenheit.setBounds(30, 100, 300, 30);
+        
+     // Botão para converter para Fahrenheit
+        JButton botaoKelvin = new JButton("Converter para Kelvin");
+        botaoKelvin.setBounds(30, 140, 300, 30);
 
-		JFrame tela = new JFrame();
-		Dimension tamanho = new Dimension();
-		tamanho.setSize(400, 300);
+        // Label para exibir o resultado da conversão
+        labelResultado = new JLabel("");
+        labelResultado.setBounds(30, 180, 300, 25);
+        
+     // Label para exibir mensagens de erro
+        labelErro = new JLabel("");
+        labelErro.setForeground(Color.red);// Texto na cor vermelho
+        labelErro.setBounds(30, 210, 300, 25);
 
-		tela.setSize(tamanho);
-		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tela.setLayout(null);
-
-		JLabel labelEntrada = new JLabel("Digite a temperatura em Celsius");
-		labelEntrada.setBounds(30, 30, 250, 25);
-
-		campoCelsius = new JTextField();
-		campoCelsius.setBounds(30, 60, 150, 25);
-
-		JButton botaoFahrenheit = new JButton("Converter para Fahrenheit");
-		botaoFahrenheit.setBounds(30, 100, 300, 30);
-		JButton botaoKelvin = new JButton("Converter para Kelvin");
-		botaoKelvin.setBounds(30, 140, 300, 30);
-
-		labelResultado = new JLabel("");
-		labelResultado.setBounds(30, 180, 300, 25);
-
-		labelErro = new JLabel("");
-		labelErro.setForeground(Color.red);
-		labelErro.setBounds(30, 210, 300, 25);
-
-		tela.getContentPane().add(labelEntrada);
-		tela.getContentPane().add(campoCelsius);
-		tela.getContentPane().add(botaoFahrenheit);
-		tela.getContentPane().add(botaoKelvin);
-		tela.getContentPane().add(labelResultado);
-		tela.getContentPane().add(labelErro);
-
-		botaoFahrenheit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				Temperatura temperatura = new Temperatura();
-				double fahrenheit = Double.parseDouble(campoCelsius.getText());
-				temperatura.setCelsius(fahrenheit);
-				double temp = temperatura.ConverterParaFahrenheit();
-				labelResultado.setText(temp + "FAHRENHEIT");
-				labelErro.setText("");
-				
-				
-				
-		});
-
-		botaoKelvin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-
-		tela.setVisible(true);
-	}
-
-	
- }
-
+     // Adiciona todos os objetos para a janela
+        tela.getContentPane().add(labelEntrada);
+        tela.getContentPane().add(campoCelsius);
+        tela.getContentPane().add(botaoFahrenheit);
+        tela.getContentPane().add(botaoKelvin);
+        tela.getContentPane().add(labelResultado);
+        tela.getContentPane().add(labelErro);
+        
+     // Ação do botão de conversão para Fahrenheit
+        botaoFahrenheit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	// Cria objeto Temperatura e define o valor em Celsius
+                    Temperatura temperatura = new Temperatura();
+                    double fahrenheit = Double.parseDouble(campoCelsius.getText());
+                    temperatura.setCelsius(fahrenheit);
+                 // Converte e mostra o resultado
+                    double temp = temperatura.converterParaFahreinheit();
+                    labelResultado.setText(temp + " FAHRENHEIT");
+                    labelErro.setText("");
+                } catch (Exception erro) {
+                	 // Exibe mensagem de erro caso o usuario não insira um número
+                    labelResultado.setText("");
+                    labelErro.setText("Ocorreu um Erro! Digite somente números.");
+                }
+            }
+        });
+     // Ação do botão de conversão para Kelvin
+        botaoKelvin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	// Cria objeto Temperatura e define o valor em Celsius
+                    Temperatura temperatura = new Temperatura();
+                    double kelvin = Double.parseDouble(campoCelsius.getText());
+                    temperatura.setCelsius(kelvin);
+                 // Converte e exibe o resultado
+                    double temp = temperatura.converterParaKelvin();
+                    labelResultado.setText(temp + " KELVIN");
+                    labelErro.setText("");
+                } catch (Exception erro) {
+                	// Exibe mensagem de erro caso o usuario não insira um número
+                    labelResultado.setText("");
+                    labelErro.setText("Ocorreu um Erro! Digite somente números.");
+                }
+            }
+        });
+     // Torna a janela visível
+        tela.setVisible(true);
+    }
 }
