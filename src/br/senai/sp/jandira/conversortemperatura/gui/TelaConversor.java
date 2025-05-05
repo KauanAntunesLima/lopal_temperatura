@@ -16,7 +16,7 @@ public class TelaConversor {
     private JTextField campoCelsius;
     // Label para exibir o resultado da conversão
     private JLabel labelResultado;
-    // Label para exibir o resultado da conversão
+    // Label para exibir mensagem de erro
     private JLabel labelErro;
  // Método para criar e exibir a tela
     public void criarTela() {
@@ -31,28 +31,28 @@ public class TelaConversor {
         
      // Label para instrução de entrada
         JLabel labelEntrada = new JLabel("Digite a temperatura em Celsius");
-        labelEntrada.setBounds(30, 30, 250, 25);
+        labelEntrada.setBounds(30, 30, 250, 25); //Posição da escrita "Digite a temperatura em Celsius"
         
      // Campo onde o usuário digita a temperatura
         campoCelsius = new JTextField();
-        campoCelsius.setBounds(30, 60, 150, 25);
+        campoCelsius.setBounds(30, 60, 150, 25); //Posição do campo para inserir a temperatura
         
      // Botão para converter para Fahrenheit
         JButton botaoFahrenheit = new JButton("Converter para Fahrenheit");
-        botaoFahrenheit.setBounds(30, 100, 300, 30);
+        botaoFahrenheit.setBounds(30, 100, 300, 30); //Posição do botão de conversão para Fahrenheit
         
-     // Botão para converter para Fahrenheit
+     // Botão para converter para Kelvin
         JButton botaoKelvin = new JButton("Converter para Kelvin");
-        botaoKelvin.setBounds(30, 140, 300, 30);
+        botaoKelvin.setBounds(30, 140, 300, 30); //Posição do botão de conversão para Kelvin
 
         // Label para exibir o resultado da conversão
         labelResultado = new JLabel("");
-        labelResultado.setBounds(30, 180, 300, 25);
+        labelResultado.setBounds(30, 180, 300, 25); //Posição do resultado d conversão
         
      // Label para exibir mensagens de erro
         labelErro = new JLabel("");
         labelErro.setForeground(Color.red);// Texto na cor vermelho
-        labelErro.setBounds(30, 210, 300, 25);
+        labelErro.setBounds(30, 210, 300, 25); //Posição para mensagem de erro
 
      // Adiciona todos os objetos para a janela
         tela.getContentPane().add(labelEntrada);
